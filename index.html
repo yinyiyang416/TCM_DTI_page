@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="utf-8">
+	<title>Dot</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <!-- theme meta -->
+  <meta name="theme-name" content="dot" />
+
+	<!-- ** CSS Plugins Needed for the Project ** -->
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
+	<!-- themefy-icon -->
+	<link rel="stylesheet" href="plugins/themify-icons/themify-icons.css">
+	<!--Favicon-->
+	<link rel="icon" href="images/favicon.png" type="image/x-icon">
+	<!-- fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+	<!-- Main Stylesheet -->
+	<link href="assets/style.css" rel="stylesheet" media="screen" />
+</head>
+
+<body>
+	<!-- header -->
+	<!-- 设定背景图片 -->
+	<header class="banner overlay bg-cover" data-background="images/banner.jpg">
+		<!--提供导航链接-->
+		<nav class="navbar navbar-expand-md navbar-dark">
+			<div class="container">
+				<!--连接，连接回本界面-->
+				<a class="navbar-brand px-2" href="index.html">DTIBank<sub>dev</sub></a>
+				<!-- 按钮，左上角标志 -->
+				<button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navigation"
+					aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				
+				<!-- 右上导航栏，连接到其它界面 -->
+				<!-- <div class="collapse navbar-collapse text-center" id="navigation">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item">
+							<a class="nav-link text-dark" href="index.html">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" href="faq.html">Faq</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" href="contact.html">contact</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" href="single.html">Inner Page</a>
+						</li>
+					</ul>
+				</div> -->
+			</div>
+		</nav>
+		<!-- banner -->
+		<div class="container section">
+			<div class="row">
+				<div class="col-lg-8 text-center mx-auto">
+					<!-- 中间大标题 -->
+					<h1 class="text-white mb-3">Introduction</h1>
+					<!-- 中间副标题 -->
+					<p class="text-white mb-4">DTIbank provides standardized information about traditional Chinese medicines, ingredients, diseases, and their corresponding gene targets</p>
+					<!-- 搜索框 -->
+					<div class="position-relative">
+						<!-- 搜索框提示 -->
+						<!-- <form action="search.php" method="post">
+							<input id="search" name="name" class="form-control" placeholder="Enter the name of the gene">
+							<i
+								class="ti-search search-icon">
+							</i>
+						</form> -->
+						
+						<input id="search" name="name" class="form-control" placeholder="Enter the name of the gene">
+						
+						<i
+							class="ti-search search-icon" onclick="gene_name_input()">
+						</i>
+						<script>
+							function gene_name_input() {
+								/* 获取文本内容 */
+								var text = document.getElementById("search").value;
+								/* 弹出内容 */
+								// alert("search gene: " + text);
+								console.log("search gene: " + text);
+								var request = new XMLHttpRequest();
+								request.open("POST", "search.php");
+								var q = "name=" + text;//  q="name"+ value；
+								request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+								request.send(q);
+								request.onreadystatechange = function() {
+									if (this.readyState == 4 && this.status == 200) {
+                    					document.getElementById("result_table").innerHTML = this.responseText;
+                					}
+									else {
+										// alert("XML返回发生错误:" + request.status);
+									}
+								}
+								// alert("search result: " + request.responseText);
+							}
+						</script>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /banner -->
+	</header>
+	<!-- /header -->
+	<!-- faq -->
+	<section class="section pb-0">
+		<div class="container">
+		<div class="row">
+			<div class="col-12">
+			<h2 class="section-title text-primary">Search Results</h2>
+				<div id="accordion">
+					<div id="result_table"></div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</section>
+	<!-- topics -->
+	<section class="section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<!-- 中间副标题 -->
+				<div class="col-12 text-center">
+					<h2 class="section-title">Statistics</h2>
+				</div>
+				<!-- topic-item -->
+				<!-- 连接到其它界面 -->
+				<div class="col-lg-4 col-sm-6 mb-4">
+					<a href="single.html" class="px-4 py-5 bg-white shadow text-center d-block match-height">
+						<!-- ti是一个图标数据集，其包含很多图标https://themify.me/themify-icons -->
+
+						<!-- 填充标志，代表抑制剂 -->
+						<i class="ti-paint-bucket icon text-primary d-block mb-4"></i>
+						<h3 class="mb-3 mt-0">Inhibitors</h3>
+						<p class="mb-0">Contains ingredients from various herbs</p>
+					</a>
+				</div>
+				<div class="col-lg-4 col-sm-6 mb-4">
+					<a href="single.html" class="px-4 py-5 bg-white shadow text-center d-block match-height">
+						<!-- 向量标志，代表基因 -->
+						<i class="ti-vector icon text-primary d-block mb-4"></i>
+						<h3 class="mb-3 mt-0">Targets</h3>
+						<p class="mb-0">Various genes in the disease pathway and their corresponding proteins</p>
+					</a>
+				</div>
+				<div class="col-lg-4 col-sm-6 mb-4">
+					<a href="single.html" class="px-4 py-5 bg-white shadow text-center d-block match-height">
+						<!-- 心碎，代表疾病 -->
+						<i class="ti-heart-broken icon text-primary d-block mb-4"></i>
+						<h3 class="mb-3 mt-0">Diseases</h3>
+						<p class="mb-0">Documented common diseases in xxx</p>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /topics -->
+
+	<!-- call to action -->
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="section px-3 bg-white shadow text-center">
+						<h2 class="mb-4">Didn&rsquo;t find an answer to your question?</h2>
+						<p class="mb-4">Musce libero nunc, dignissim quis turpis quis, semper vehicula dolor. Suspendisse tincidunt
+							consequat quam.</p>
+						<a href="contact.html" class="btn btn-primary">contact us</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /call to action -->
+
+	<!-- footer -->
+	<footer class="section pb-4">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-8 text-md-left text-center">
+					<p class="mb-md-0 mb-4">Copyright © 2020 Designed and Developed by <a
+							href="https://themefisher.com/">themefisher</a></p>
+				</div>
+				<div class="col-md-4 text-md-right text-center">
+					<ul class="list-inline">
+						<li class="list-inline-item"><a class="text-color d-inline-block p-2" href="#"><i
+									class="ti-facebook"></i></a></li>
+						<li class="list-inline-item"><a class="text-color d-inline-block p-2" href="#"><i
+									class="ti-twitter-alt"></i></a></li>
+						<li class="list-inline-item"><a class="text-color d-inline-block p-2" href="#"><i class="ti-github"></i></a>
+						</li>
+						<li class="list-inline-item"><a class="text-color d-inline-block p-2" href="#"><i
+									class="ti-linkedin"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- /footer -->
+
+	<!-- ** JS Plugins Needed for the Project ** -->
+	<!-- jquiry -->
+	<script src="plugins/jquery/jquery-1.12.4.js"></script>
+	<!-- Bootstrap JS -->
+	<script src="plugins/bootstrap/bootstrap.min.js"></script>
+	<!-- match-height JS -->
+	<script src="plugins/match-height/jquery.matchHeight-min.js"></script>
+	<!-- Main Script -->
+	<script src="assets/script.js"></script>
+</body>
+
+</html>
